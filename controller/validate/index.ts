@@ -18,7 +18,7 @@ const controller = {
       const pathUrl = splitPath[splitPath.length - 1]
 
       const normalisedDomain = helper.getEnumForDomain(pathUrl)
-
+      console.log('++++++ normalisedDomain', normalisedDomain)
       switch (normalisedDomain) {
         case DOMAIN.RETAIL:
           {

@@ -906,24 +906,28 @@ const validate_schema_on_issue_status_igm_for_json = (data: any) => {
 }
 
 const validate_schema_for_json = (data: any, schemaPath: any) => {
-  let error_list
+  let error_list: any[] = []
+
   try {
     const schemaYAML = fs.readFileSync(schemaPath, 'utf8')
-    const schema = yaml.load(schemaYAML)
-    if (typeof schema === 'object') {
+    const schema = yaml.load(schemaYAML) as Record<string, any>
+
+    // Add type definition for strict mode validation
+    if (typeof schema === 'object' && schema !== null) {
+      // Ensure schema has type definitions
+      if (schema.properties?.context?.allOf?.[1] && !schema.properties.context.allOf[1].type) {
+        schema.properties.context.allOf[1].type = 'object'
+      }
       error_list = validate_schema(data, schema)
     } else {
       console.log('Schema is not a valid object.')
-      error_list = []
     }
   } catch (err) {
     console.log('Error loading or parsing schema:', err)
-    error_list = []
   }
 
   return formatted_error(error_list)
 }
-
 const FISValidator = {
   validate_schema_search_FIS_for_json: (data: any) => validate_schema_for_json(data, 'schema/FIS/search.yaml'),
   validate_schema_on_search_FIS_for_json: (data: any) => validate_schema_for_json(data, 'schema/FIS/on_search.yaml'),

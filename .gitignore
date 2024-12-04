@@ -9,3 +9,13 @@ dbfiles
 *.md
 .DS_Store
 package-lock.json
+init.ts
+tags.ts
+onInit.ts
+select.ts
+onSelect.ts
+confirm.ts
+onConfirm.ts
+cancel.ts
+onCancel.ts
+onSearch.ts
