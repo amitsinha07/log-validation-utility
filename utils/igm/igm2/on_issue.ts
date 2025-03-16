@@ -171,10 +171,10 @@ const validateActorRelationships = (message: any, errorObj: any) => {
   }
   
   // Check customer_id matches CONSUMER actor id
-  const consumerActor = message.issue.actors.find((actor: any) => actor.type === 'CONSUMER');
-  if (consumerActor && message.issue.customer_id !== consumerActor.id) {
-    errorObj.customer_id = `customer_id (${message.issue.customer_id}) should match the id of the CONSUMER actor (${consumerActor.id})`;
-  }
+  // const consumerActor = message.issue.actors.find((actor: any) => actor.type === 'CONSUMER');
+  // if (consumerActor && message.issue.customer_id !== consumerActor.id) {
+  //   errorObj.customer_id = `customer_id (${message.issue.customer_id}) should match the id of the CONSUMER actor (${consumerActor.id})`;
+  // }
 };
 
 /**
